@@ -21,6 +21,7 @@ import java.util.List;
 public class NavColltroller {
     @Autowired
     private NavService navService;
+    private NavMapper navMapper;
     @GetMapping("/list")
     public List<Nav> list(){
         return navService.list();
@@ -29,8 +30,9 @@ public class NavColltroller {
     public Result list2( @RequestParam int id){
        // HashMap param = query.getParam();
 
-        LambdaQueryWrapper queryWrapper = new LambdaQueryWrapper();
-       queryWrapper.eq("typeId",id);
+//        LambdaQueryWrapper queryWrapper = new LambdaQueryWrapper();
+//       queryWrapper.eq("typeId",id);
+
 
         return Result.success(200,navService.count(),"成功",navService.list());
     }

@@ -22,3 +22,12 @@ datasource:
   driver: com.mysql.cj.jdbc.Driver
   username: root
   password: 745458741
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+      #table-prefix: t_
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+dr
