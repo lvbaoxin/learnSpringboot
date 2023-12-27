@@ -8,6 +8,8 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  main:
+    allow-bean-definition-overriding: true
 
 server:
   port: 8090
@@ -30,4 +32,3 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-dr
