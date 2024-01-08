@@ -19,8 +19,6 @@ public class Result {
         return result(200,total,"成功",data);
     }
 
-
-
     private static Result result(int code, Long total, String msg, Object data) {
       Result result = new Result();
       result.setCode(code);
@@ -29,4 +27,6 @@ public class Result {
       result.setData(data);
       return result;
     }
+
+
 }
