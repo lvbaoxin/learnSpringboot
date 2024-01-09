@@ -1,16 +1,18 @@
 package com.project.controller;
 
 import com.alibaba.druid.util.StringUtils;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.project.common.QueryPageParam;
 import com.project.common.Result;
 import com.project.entity.Book;
+import com.project.entity.User;
 import com.project.mapper.BookMapper;
 import com.project.service.BookService;
 import com.project.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -33,20 +35,31 @@ public class BookColltroller {
 //        if(bookService.findByTitle(title)!=null){
 //            throw new RuntimeException("标题已存在");
 //        }
-        return Result.success(200,1L,"添加成功",bookService.save(book));
+        return Result.success(200,"添加成功",bookService.save(book));
     }
 
 
     @GetMapping("/books")
-    public List<Book> List(){
-        System.out.println(bookService.list());
-        return bookService.list();
-        //bookService.list().forEach(System.out::println);
+    public Result List() throws Exception {
+//        if(true) {
+//            throw new Exception();
+//        }
+
+        return Result.success(200, bookService.count(),"成功",bookService.list());
     }
     @GetMapping("/book/{id}")
     public Result getObj(@PathVariable String id){
         System.out.println(bookService.getById(id));
-        return Result.success(200,1L,"成功",bookService.getById(id));
+        return Result.success(200,"成功",bookService.getById(id));
+    }
+    @PostMapping("/bookListPage")
+    public Result listPage(@RequestBody QueryPageParam query){
+        HashMap param = query.getParam();
+        Page<Book> page = new Page(query.getPageNum(), query.getPageSize());
+        LambdaQueryWrapper<Book> queryWrapper = new LambdaQueryWrapper();
+        queryWrapper.like(Book::getTitle,param.get("title"));
+        IPage result = bookService.page(page, queryWrapper);
+        return Result.success(200, result.getTotal(),"成功",result.getRecords());
     }
 
 
