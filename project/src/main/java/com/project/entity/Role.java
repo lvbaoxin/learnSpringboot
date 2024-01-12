@@ -11,11 +11,14 @@ import java.util.Date;
 public class Role {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+    @TableField("roleName")
     private String roleName;
+    @TableField("roleSign")
     private String roleSign;
-    private String describe;
+    @TableField("description")
+    private String description;
     private Integer sort;
     private Integer status;
-    @TableField("create_time")
-    private Date createdTime;
+    @TableField("createTime")
+    private Date createTime;
 }

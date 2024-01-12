@@ -1,34 +1,34 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 80200
+Source Server         : test
+Source Server Version : 80029
 Source Host           : localhost:3306
 Source Database       : project
 
 Target Server Type    : MYSQL
-Target Server Version : 80200
+Target Server Version : 80029
 File Encoding         : 65001
 
-Date: 2023-12-25 21:58:25
+Date: 2024-01-12 16:01:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `nav`
+-- Table structure for nav
 -- ----------------------------
 DROP TABLE IF EXISTS `nav`;
 CREATE TABLE `nav` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb3_unicode_ci NOT NULL,
-  `url` varchar(255) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `url` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
   `type_id` int DEFAULT NULL,
   `createtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `type_id` (`type_id`),
   CONSTRAINT `nav_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `navtype` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of nav
@@ -39,14 +39,14 @@ INSERT INTO `nav` VALUES ('3', '111', '211', '2', '2023-12-25 21:25:51');
 INSERT INTO `nav` VALUES ('4', '222', '333', '1', '2023-12-25 21:26:03');
 
 -- ----------------------------
--- Table structure for `navtype`
+-- Table structure for navtype
 -- ----------------------------
 DROP TABLE IF EXISTS `navtype`;
 CREATE TABLE `navtype` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of navtype
@@ -56,21 +56,43 @@ INSERT INTO `navtype` VALUES ('2', '后端');
 INSERT INTO `navtype` VALUES ('3', '工具');
 
 -- ----------------------------
--- Table structure for `user`
+-- Table structure for role
+-- ----------------------------
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `roleName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `roleSign` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sort` int DEFAULT NULL,
+  `status` int DEFAULT '0',
+  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of role
+-- ----------------------------
+INSERT INTO `role` VALUES ('2', '角色名称1', '角色标识', '角色描述', '0', '0', '2024-01-12 15:38:23');
+INSERT INTO `role` VALUES ('3', '角色名称2', '角色标识2', '角色描述2', '1', '0', '2024-01-12 15:59:28');
+INSERT INTO `role` VALUES ('4', '角色名称3', '角色标识3', '角色描述3', '3', '1', '2024-01-12 15:59:53');
+
+-- ----------------------------
+-- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `no` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL COMMENT '账号',
-  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '姓名',
-  `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '密码',
+  `no` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '账号',
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL COMMENT '姓名',
+  `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL COMMENT '密码',
   `age` int DEFAULT NULL COMMENT '年龄',
-  `sex` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '性别',
-  `phone` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL COMMENT '手机号',
+  `sex` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL COMMENT '性别',
+  `phone` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL COMMENT '手机号',
   `role_id` int NOT NULL COMMENT '角色0超级1管理员2普通',
-  `isValid` varchar(4) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT 'Y' COMMENT '是否有效默认Y',
+  `isValid` varchar(4) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT 'Y' COMMENT '是否有效默认Y',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of user

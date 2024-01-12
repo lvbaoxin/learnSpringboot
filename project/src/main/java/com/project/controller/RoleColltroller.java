@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 
 @RestController
+@RequestMapping("/role")
 public class RoleColltroller {
     @Autowired
     private RoleService roleService;
@@ -40,12 +41,13 @@ public class RoleColltroller {
         System.out.println(roleService.getById(id));
         return Result.success(200,"成功",roleService.getById(id));
     }
-    @PostMapping("/roleListPage")
+    @PostMapping("/list")
     public Result listPage(@RequestBody QueryPageParam query){
+        System.out.println(query+"query");
         HashMap param = query.getParam();
         Page<Role> page = new Page(query.getPageNum(), query.getPageSize());
         LambdaQueryWrapper<Role> queryWrapper = new LambdaQueryWrapper();
-        queryWrapper.like(Role::getRoleName,param.get("roleName"));
+        queryWrapper.like(Role::getRoleName,query.getSearch());
         IPage result = roleService.page(page, queryWrapper);
         return Result.success(200, result.getTotal(),"成功",result.getRecords());
     }
