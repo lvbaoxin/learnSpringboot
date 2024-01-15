@@ -9,38 +9,38 @@ public class Result {
 
     private int code;
     private Long total;
-    private String msg;
+    private String message;
     private Object data;
 
-    public static Result fail( int code, String msg){
-        return result(code,msg);
+    public static Result fail( int code, String message){
+        return result(code,message);
     }
-    public static Result success(int code, Long total, String msg, Object data){
-        return result(200,total,"成功",data);
+    public static Result success(int code, Long total, String message, Object data){
+        return result(200,total,message,data);
     }
-    public static Result success(int code,  String msg, Object data){
-        return result(200,"成功",data);
+    public static Result success(int code,  String message, Object data){
+        return result(200,message,data);
     }
-    private static Result result(int code, Long total, String msg, Object data) {
+    private static Result result(int code, Long total, String message, Object data) {
       Result result = new Result();
       result.setCode(code);
       result.setTotal(total);
-      result.setMsg(msg);
+      result.setMessage(message);
       result.setData(data);
       return result;
     }
 
-    private static Result result(int code, String msg, Object data) {
+    private static Result result(int code, String message, Object data) {
         Result result = new Result();
         result.setCode(code);
-        result.setMsg(msg);
+        result.setMessage(message);
         result.setData(data);
         return result;
     }
-    private static Result result(int code, String msg) {
+    private static Result result(int code, String message) {
         Result result = new Result();
         result.setCode(code);
-        result.setMsg(msg);
+        result.setMessage(message);
         return result;
     }
 

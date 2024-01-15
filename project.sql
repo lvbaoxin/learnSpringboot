@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80029
 File Encoding         : 65001
 
-Date: 2024-01-12 16:01:12
+Date: 2024-01-15 16:43:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -78,25 +78,47 @@ INSERT INTO `role` VALUES ('3', '角色名称2', '角色标识2', '角色描述2
 INSERT INTO `role` VALUES ('4', '角色名称3', '角色标识3', '角色描述3', '3', '1', '2024-01-12 15:59:53');
 
 -- ----------------------------
+-- Table structure for token
+-- ----------------------------
+DROP TABLE IF EXISTS `token`;
+CREATE TABLE `token` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_time` datetime DEFAULT NULL,
+  `indate_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`user_id`),
+  CONSTRAINT `id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of token
+-- ----------------------------
+INSERT INTO `token` VALUES ('1', '1', 'aaabbbccc123345678', '2024-01-15 09:59:53', '2024-01-15 11:59:56');
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `userName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '密码',
   `no` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '账号',
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL COMMENT '姓名',
-  `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL COMMENT '密码',
+  `phone` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '手机号',
+  `isValid` varchar(4) COLLATE utf8_unicode_ci DEFAULT 'Y' COMMENT '是否有效默认Y',
   `age` int DEFAULT NULL COMMENT '年龄',
   `sex` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL COMMENT '性别',
-  `phone` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL COMMENT '手机号',
-  `role_id` int NOT NULL COMMENT '角色0超级1管理员2普通',
-  `isValid` varchar(4) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT 'Y' COMMENT '是否有效默认Y',
+  `createdTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '01', '张三1', '123123', '19', '0', '15942458888', '0', 'Y');
-INSERT INTO `user` VALUES ('2', '01', '张三111', '123123', '19', '0', '15942458888', '0', 'Y');
-INSERT INTO `user` VALUES ('3', '03', '张三3', '123456', null, '0', '15942458888', '0', 'Y');
+INSERT INTO `user` VALUES ('1', 'Lyu', null, '123123', '01', '张三1', '15942458888', 'Y', '19', '0', '2024-01-15 11:01:15');
+INSERT INTO `user` VALUES ('2', null, null, '123123', '01', '张三111', '15942458888', 'Y', '19', '0', '2024-01-15 11:01:19');
+INSERT INTO `user` VALUES ('3', null, null, '123456', '03', '张三3', '15942458888', 'Y', null, '0', '2024-01-15 11:01:23');

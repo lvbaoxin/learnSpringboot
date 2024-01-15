@@ -6,23 +6,18 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.project.common.QueryPageParam;
 import com.project.common.Result;
 import com.project.entity.User;
-import com.project.mapper.UserMapper;
 import com.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 
-@RestController
-@RequestMapping("/user")
-public class userController {
+//@RestController
+//@RequestMapping("/user")
+public class userController1 {
  @Autowired
  private UserService userService;
- private UserMapper userMapper;
  @GetMapping("/list")
  public List<User> list(){
   // return userService.list();
@@ -79,19 +74,5 @@ public class userController {
         IPage result = userService.page(page, queryWrapper);
         System.out.println(result.getTotal() + "total");
         return Result.success(200,result.getTotal(),"成功",result.getRecords());
-    }
-
-    @PostMapping("/login")
-    public Result login(@RequestBody HashMap param){
-
-
-//        User user = userMapper.selectOne();
-//        if (user != null && user.getPassword().equals(password)) {
-//            return ResponseEntity.ok("登录成功");
-//        } else {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("帐号或密码错误");
-//        }
-
-        return Result.success(200,"登录成功",11);
     }
 }
