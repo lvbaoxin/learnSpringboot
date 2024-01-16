@@ -74,6 +74,11 @@
             <artifactId>druid</artifactId>
             <version>1.2.20</version>
         </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.5.2</version>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

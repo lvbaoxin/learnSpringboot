@@ -15,12 +15,13 @@ public class Result {
     public static Result fail( int code, String message){
         return result(code,message);
     }
-    public static Result success(int code, Long total, String message, Object data){
-        return result(200,total,message,data);
-    }
     public static Result success(int code,  String message, Object data){
-        return result(200,message,data);
+        return result(code,message,data);
     }
+    public static Result success(int code, Long total, String message, Object data){
+        return result(code,total,message,data);
+    }
+
     private static Result result(int code, Long total, String message, Object data) {
       Result result = new Result();
       result.setCode(code);
