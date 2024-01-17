@@ -23,8 +23,14 @@ public class MyFastAutoGenerator {
                             .pathInfo(Collections.singletonMap(OutputFile.xml, "E:\\learnJava\\learnSpringboot\\project\\src\\main\\resources\\mapper")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("token") // 设置需要生成的表名
-                            .addTablePrefix("", ""); // 设置过滤表前缀
+                    builder.addInclude("myweb_blog","myweb_blogcategory") // 设置需要生成的表名
+                            .addTablePrefix("myweb_") // 设置过滤表前缀
+                            .controllerBuilder()
+                            .enableRestStyle()//开启restful风格
+                            .entityBuilder()
+                            .enableLombok()//开启 Lombok
+                            .mapperBuilder()
+                            .enableMapperAnnotation();//开启 @Mapper
                 })
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .execute();
