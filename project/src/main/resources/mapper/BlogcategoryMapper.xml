@@ -2,4 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.mapper.BlogcategoryMapper">
 
+
+    <select id="selectBlogCategories" resultType="com.project.entity.Blogcategory">
+             select title from myweb_blogcategory where id = #{id}
+    </select>
 </mapper>

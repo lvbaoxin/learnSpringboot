@@ -6,9 +6,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.project.common.QueryPageParam;
 import com.project.common.Result;
 import com.project.entity.Blog;
+import com.project.entity.Blogcategory;
 import com.project.entity.User;
 import com.project.mapper.BlogMapper;
+import com.project.mapper.BlogcategoryMapper;
 import com.project.service.IBlogService;
+import com.project.service.IBlogcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,7 @@ import javax.xml.ws.soap.Addressing;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,17 +36,37 @@ import java.util.Map;
 public class BlogController {
     @Autowired
     private IBlogService iBlogService;
-
+    private IBlogcategoryService iBlogcategoryService;
     //列表
-    @RequestMapping("/listPage")
-    public Result list(@RequestBody QueryPageParam query) {
+    @PostMapping("/listPage")
+    public Result list(@RequestBody HashMap query) {
         try {
             //分页查询
-            HashMap param = query.getParam();
-            Page<Blog> page = new Page<>(query.getPageNum(), query.getPageSize());
+
+            Page<Blog> page = new Page<>((Integer) query.get("pageNum"), (Integer) query.get("pageSize"));
             LambdaQueryWrapper<Blog> queryWrapper = new LambdaQueryWrapper();
-            queryWrapper.like(param.get("title") != null, Blog::getTitle, param.get("title").toString());
+            queryWrapper.like(query.get("search") != null, Blog::getTitle, query.get("search").toString());
+            queryWrapper.orderByAsc(Blog::getSort); // 添加排序规则
             IPage result = iBlogService.page(page, queryWrapper);
+            //BlogcategoryMapper.selectBlogCategories(1);
+
+            // 查询所有分类
+//            List<Blog> records  = result.getRecords();
+//
+//            // 查询每篇文章对应的分类
+//            for (Blog blog : records ) {
+//              //  if(iBlogcategoryService.getById(blog.getBlogcategoryId())!=null){
+//                    System.out.println(iBlogcategoryService.getById(1)+"blog.getBlogcategoryId()");
+//              //  }
+//
+//
+//
+//              //  List<Blogcategory> blogCategories = BlogcategoryMapper.selectBlogCategories(blog.getBlogcategoryId());
+//             //   blog.setCategories(blogCategories);
+//            }
+
+
+
             return Result.success(200, result.getTotal(), "成功", result.getRecords());
         } catch (RuntimeException e) {
             e.printStackTrace();
