@@ -3,6 +3,10 @@ package com.project.mapper;
 import com.project.entity.Blogcategory;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -15,4 +19,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface BlogcategoryMapper extends BaseMapper<Blogcategory> {
 
+
+//    @Select("select * from myweb_blogcategory where id = #{id}")
+//    static List<Blogcategory> selectBlogCategories(int id);
 }
