@@ -1,11 +1,12 @@
 package com.project.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.HashMap;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -37,16 +38,11 @@ public class Blog implements Serializable {
     private LocalDateTime createAt;
 
     private LocalDateTime updateAt;
-
-    private Long blogcategoryId;
+    @TableField("blogCategory_id")
+    private Long blogCategoryId;
 
     private String description;
 
     private int sort;
-
-
-    public void setCategories(List<Blogcategory> blogCategories) {
-    }
-
 
 }

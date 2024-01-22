@@ -11,6 +11,12 @@ spring:
       matching-strategy: ant_path_matcher
   main:
     allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+        # 单文件大小限制
+      max-file-size: 10MB
+        # 总上传大小限制
+      max-request-size: 10MB
 
 server:
   port: 8000
@@ -33,4 +39,6 @@ mybatis-plus:
       #table-prefix: t_
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
+upload:
+  # 上传的图片保存路径（可自定义）
+  path:  E:/learnJava/learnSpringboot/project/src/main/java/com/project/upload/
