@@ -2,5 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.mapper.BlogMapper">
 
+<!--    <select id="listBlogsWithCategory" resultType="com.project.entity.Blog" >-->
+
+<!--        SELECT b.id,b.title,b.update_at,b.create_at,b.sort,b.description,b.abstracts,b.pic,b.blogCategory_id,a.title AS 'category'-->
+<!--        FROM `myweb_blogcategory` a-->
+<!--                 right JOIN myweb_blog b-->
+<!--                            on a.id=b.blogCategory_id-->
+
+<!--    </select>-->
 
 </mapper>

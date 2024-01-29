@@ -27,10 +27,7 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * <p>
@@ -55,15 +52,25 @@ public class BlogController {
     //列表
     @PostMapping("/listPage")
     public Result list(@RequestBody HashMap query) {
+
         try {
-            //分页查询
+
             Page<Blog> page = new Page<>((Integer) query.get("pageNum"), (Integer) query.get("pageSize"));
             LambdaQueryWrapper<Blog> queryWrapper = new LambdaQueryWrapper();
             queryWrapper.like(query.get("search") != null, Blog::getTitle, query.get("search").toString());
             queryWrapper.orderByAsc(Blog::getSort); // 添加排序规则
             IPage result = iBlogService.page(page, queryWrapper);
+
             return Result.success(200, result.getTotal(), "成功",result.getRecords());
 
+//            Page<Blog> page = new Page<>((Integer) query.get("pageNum"), (Integer) query.get("pageSize"));
+//            LambdaQueryWrapper<Blog> queryWrapper = new LambdaQueryWrapper();
+//            queryWrapper.like(query.get("search") != null, Blog::getTitle, query.get("search").toString());
+//            queryWrapper.orderByAsc(Blog::getSort); // 添加排序规则
+//            IPage<Blog> result = iBlogService.listBlogs();
+             // return Result.success(200, result.getTotal(), "成功",result.getRecords());
+
+         //return Result.success(200, (long) iBlogService.listBlogs().size(), "成功",iBlogService.listBlogs());
         } catch (RuntimeException e) {
             e.printStackTrace();
             return Result.fail(500, e.getMessage());

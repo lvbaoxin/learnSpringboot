@@ -28,4 +28,7 @@ import java.util.List;
 public interface BlogMapper extends BaseMapper<Blog> {
 
 
+
+
+  //  List<Blog> listBlogsWithCategory();
 }

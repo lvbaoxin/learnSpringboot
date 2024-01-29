@@ -10,6 +10,8 @@ import java.util.HashMap;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Result;
 
 /**
  * <p>
@@ -22,6 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("myweb_blog")
+
 public class Blog implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,11 +41,21 @@ public class Blog implements Serializable {
     private LocalDateTime createAt;
 
     private LocalDateTime updateAt;
-    @TableField("blogCategory_id")
-    private Long blogCategoryId;
+
 
     private String description;
 
     private int sort;
-
+    @TableField("blogCategory_id")
+    private Long blogCategoryId;
+//    private Blogcategory category;
+//
+//    public Blogcategory getCategory() {
+//        return   @TableField("blogCategory_id")
+//        private Long blogCategoryId;category;
+//    }
+//
+//    public void setCategory(Blogcategory category) {
+//        this.category = category;
+//    }
 }
